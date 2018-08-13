@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <p>【主な業務内容】</p>
+    <button id="workIn">枠を追加</button>
+    <button id="workOut">枠を削除</button>
+    <div class="work">
+        <input type="text">
+    </div>
+    <p>【今週の業務目標(達成度)】</p>
+    <button id="thisWeekIn">枠を追加</button>
+    <button id="thisWeekOut">枠を削除</button>
+    <div class="thisWeek">
+        <input type="text">
+    </div>
+    <p>【業務進捗・改善策】</p>
+    <button id="thisWeekStepIn">枠を追加</button>
+    <button id="thisWeekStepOut">枠を削除</button>
+    <div class="thisWeekStep">
+        <input type="text">
+    </div>
+    <p>【今週の個人目標(達成度)】</p>
+    <button id="thisWeekPersonalIn">枠を追加</button>
+    <button id="thisWeekPersonalOut">枠を削除</button>
+    <div class="thisWeekPersonal">
+        <input type="text">
+    </div>
+    <p>【進捗・改善策】</p>
+    <button id="stepIn">枠を追加</button>
+    <button id="stepOut">枠を削除</button>
+    <div class="step">
+        <input type="text">
+    </div>
+    <p>所感</p>
+    <textarea row="10" cols="60">
+        {{ str }}
+    </textarea>
+    <button id="output">日報作成！</button>
+    <p id="title"></p>
+    <p>各位
+        <p>
+            <p>お疲れ様です</p>
+            <p>team18の織田　凌太郎（おだ　りょうたろう）です</p>
+            <p id="dateToday"></p>
+            <p> 【業務時間】</p>
+            <p id="time"></p>
+            <p> 【主な業務】</p>
+            <ul id="workOutput">
+            </ul>
+            <p> 【今週の業務目標(達成度)】</p>
+            <ul id="thisWeekOutput">
+            </ul>
+            <p> 【業務進捗・改善策】</p>
+            <ul id="thisWeekStepOutput">
+            </ul>
+            <p> 【今週の個人目標(達成度)】</p>
+            <ul id="thisWeekPersonalOutput">
+            </ul>
+            <p> 【進捗・改善策】</p>
+            <ul id="stepOutput">
+            </ul>
+            <p>【所感】</p>
+            <p id="last"></p>
+            <p>明日も宜しくお願いします。</p>
+            <br>
+            <p>以上です。</p>
+            <p>最後までお読みいただき、ありがとうございました。</p>
+            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script>
+            var now = new Date();
+            var month = now.getMonth() + 1;
+            var date = now.getDate();
+            var hour = now.getHours();
+            $(function() {
+                $("#dateToday").text(month + "月" + date + "日の日報を提出いたします。");
+                $("#time").text("10:00~" + hour + ":00");
+                $("#workIn").on("click", function() {
+                    $('<input type="text">').appendTo(".work");
+                });
+                $("#thisWeekIn").on("click", function() {
+                    $('<input type="text">').appendTo(".thisWeek");
+                });
+                $("#thisWeekStepIn").on("click", function() {
+                    $('<input type="text">').appendTo(".thisWeekStep");
+                });
+                $("#thisWeekPersonalIn").on("click", function() {
+                    $('<input type="text">').appendTo(".thisWeekPersonal");
+                });
+                $("#stepIn").on("click", function() {
+                    $('<input type="text">').appendTo(".step");
+                });
+                $("#workOut").on("click", remove1);
+                $("#thisWeekOut").on("click", remove2);
+                $("#thisWeekStepOut").on("click", remove3);
+                $("#thisWeekPersonalOut").on("click", remove4);
+                $("#stepOut").on("click", remove5);
+            });
+            $("#output").on("click", function() {
+                var forms1 = $('.work input');
+                var works1 = [];
+                for (var i = 0 + 1; i < forms1.length + 1; i++) {
+                    value = $('.work input[type=text]:nth-of-type(' + i + ')').val();
+                    works1.push(value);
+                };
+                $.each(works1, function(index, val) {
+                    $("#workOutput").append("<li>" + val + "</li>")
+                })
+
+                var forms2 = $('.thisWeek input');
+                var works2 = [];
+                for (var i = 0 + 1; i < forms2.length + 1; i++) {
+                    value = $('.thisWeek input[type=text]:nth-of-type(' + i + ')').val();
+                    works2.push(value);
+                };
+                $.each(works2, function(index, val) {
+                    $("#thisWeekOutput").append("<li>" + val + "</li>")
+                })
+
+                var forms3 = $('.thisWeekStep input[type=text]');
+                var works3 = [];
+                for (var i = 0 + 1; i < forms3.length + 1; i++) {
+                    value = $('.thisWeekStep input[type=text]:nth-of-type(' + i + ')').val();
+                    works3.push(value);
+                };
+                $.each(works3, function(index, val) {
+                    $("#thisWeekStepOutput").append("<li>" + val + "</li>")
+                })
+
+                var forms4 = $('.thisWeekPersonal input[type=text]');
+                var works4 = [];
+                for (var i = 0 + 1; i < forms4.length + 1; i++) {
+                    value = $('.thisWeekPersonal input[type=text]:nth-of-type(' + i + ')').val();
+                    works4.push(value);
+                };
+                $.each(works4, function(index, val) {
+                    $("#thisWeekPersonalOutput").append("<li>" + val + "</li>")
+                })
+
+                var forms5 = $('.step input[type=text]');
+                var works5 = [];
+                for (var i = 0 + 1; i < forms5.length + 1; i++) {
+                    value = $('.step input[type=text]:nth-of-type(' + i + ')').val();
+                    works5.push(value);
+                };
+                $.each(works5, function(index, val) {
+                    $("#stepOutput").append("<li>" + val + "</li>")
+                });
+                $("#last").html($("textarea").val().replace(/\n/g, "<br>\n"));
+                $("#title").text("【team18日報】" + month + "月" + date + "日_織田凌太郎");
+
+            });
+
+            function remove1() {
+                $(".work input:last-child").remove();
+            }
+
+            function remove2() {
+                $(".thisWeek input:last-child").remove();
+            }
+
+            function remove3() {
+                $(".thisWeekStep input:last-child").remove();
+            }
+
+            function remove4() {
+                $(".thisWeekPersonal input:last-child").remove();
+            }
+
+            function remove5() {
+                $(".step input:last-child").remove();
+            }
+            </script>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ import re
 import json
 from collections import OrderedDict
 import pprint
-from outlooksearch import learn
+from outlooksearch import markovLearn
 # Create your views here.
 
 def home(request):
@@ -61,19 +61,18 @@ def mail(request):
             for text in textList:
                 if text:
                     list.append(text + "。")
-    print(list)
     f = open('test.text', 'w') # ファイルを開く(該当ファイルがなければ新規作成)
     for text in list:
          f.write(text)
     f.close()
 
-    markov()
+    nippoAuto = "本日は"+ markovLearn.markov()
     # path_w = 'texts/test_w.txt'
     # with open(path_w, mode="w") as f:
     #     for text in list:
     #         f.write(text)
-
-    return HttpResponse('Messages: {0}'.format(messages))
+    params = {"str": nippoAuto}
+    return render(request, "mail.html", params)
 
 def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>')
