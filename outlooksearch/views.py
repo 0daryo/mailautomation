@@ -50,6 +50,17 @@ def mail(request):
     #     pprint.pprint(messages)
     values=messages["value"]
     list = []
+    primaryWorkStart = ""
+    thisWeekGoalStart = ""
+    thisWeekPercentageStart = ""
+    thisWeekPersonalStart = ""
+    thisWeekPersonalPercentageStart = ""
+    latestBody = cleanhtml(values[0]["body"]["content"])
+    primaryWorkStart = latestBody.index("主な業務")
+    thisWeekGoalStart = latestBody.index("今週の業務目標(達成度)")
+    thisWeekPercentageStart = latestBody.index("業務進捗・改善策")
+    thisWeekPersonalStart = latestBody.index("今週の個人目標(達成度)")
+    thisWeekPersonalPercentageStart = latestBody.index("進捗・改善策")
     for value in values:
         nippoBody = value["body"]["content"]
         if "所感" in nippoBody and "明日も" in nippoBody:
